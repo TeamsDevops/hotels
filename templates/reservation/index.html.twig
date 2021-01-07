@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+    <h1>Reservation index</h1>
+<div class="text-center">
+<a href="{{ path('reservation_new') }}" class="btn btn-primary mb-2 col-lg-2">Create new</a>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdRes</th>
+                <th>DateAriv</th>
+                <th>DateDep</th>
+                <th>nom client</th>
+                <th>numero chambre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.idRes }}</td>
+                <td>{{ reservation.dateAriv }}</td>
+                <td>{{ reservation.dateDep }}</td>
+                <td>
+                {{reservation.numClient.nom }}
+                </td>
+                <td>
+                {{reservation.numeroChembre }}
+                </td>
+                <td>
+                    <a href="{{ path('reservation_show', {'idRes': reservation.idRes}) }}" class="btn btn-primary"><i class="fa fa-eye fa-2x"></i></a>
+                    <a href="{{ path('reservation_edit', {'idRes': reservation.idRes}) }}" class="btn btn-warning"><i class="fa fa-edit fa-2x"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

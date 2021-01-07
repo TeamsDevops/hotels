@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chambre index{% endblock %}
+
+{% block body %}
+    <h1>Chambre index</h1>
+<h2 class="text-danger">Nombre des chambres: {{ chambres|length }}</h2>
+<div class="text-center">
+<a href="{{ path('chambre_new') }}" class="btn btn-primary mb-2 col-lg-2">Create new</a>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Prix</th>
+                <th>NbrLit</th>
+                <th>NbrPers</th>
+                <th>Confort</th>
+                <th>id reservation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for chambre in chambres %}
+            <tr>
+                <td>{{ chambre.numero }}</td>
+                <td>{{ chambre.prix }}</td>
+                <td>{{ chambre.nbrLit }}</td>
+                <td>{{ chambre.nbrPers }}</td>
+                <td>{{ chambre.confort }}</td>
+                <td>{{ chambre.numRes.idRes }}</td>
+                <td>
+                    <a href="{{ path('chambre_show', {'numero': chambre.numero}) }}"  class="btn btn-primary"><i class="fa fa-eye fa-2x"></i></a>
+                    <a href="{{ path('chambre_edit', {'numero': chambre.numero}) }}" class="btn btn-warning"><i class="fa fa-edit fa-2x"></i></a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
